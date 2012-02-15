@@ -504,18 +504,25 @@ var slides = function() {
 
       switch (e.keyCode) {
 
-        case 37: // left arrow
+        case 37: 
+        case 33: // left arrow
           this.prev(); break;
         case 39: // right arrow
 
+        case 34:
         case 32: // space
 
           this.next(); break;
-        case 50: // 2
+        case 50:
+		case 190: // 2
+		  console.log(e.keyCode);
           this.showNotes(); break;
         case 51: // 3
 
           this.switch3D(); break;
+		case 116:
+		location.reload(true); break;
+
       }
 
     },

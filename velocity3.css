@@ -93,12 +93,9 @@ body > footer {
 			rgb(129, 149, 175) 100%);
  	padding: 7px 10px;
 	background-color: rgb(109, 132, 162);
-	border-bottom-color:1px solid rgb(45, 54, 66);
-	border-top:1px solid rgb(109, 132, 162);
 	display: block;
 	height: 47px;
 	line-height: 30px;
-	display: block;
 	border-bottom: 1px solid #2C3542;
 	border-top: 1px solid #CDD5DF;
 }
@@ -158,9 +155,6 @@ body > footer{
 	 background-size: 100% 50%;
 	 background-repeat:no-repeat;
 	 border: 1px solid #2F353E;
-	 -webkit-box-shadow: 
-	 		0 1px 0 rgba(255,255,255, 0.4), 
-			inset 0 1px 0 rgba(255,255,255,0.4);
 	-moz-box-shadow: 
 	 		0 1px 0 rgba(255,255,255, 0.4), 
 			inset 0 1px 0 rgba(255,255,255,0.4);
@@ -183,7 +177,7 @@ body > footer{
 
   color: black;
   display: inline-block;
-  padding: 3px 3px 3px 3px;
+  padding: 3px;
   text-shadow: none;
   letter-spacing: 0;
   position: relative;
@@ -215,7 +209,7 @@ body > footer{
 }
 .slide {
 
-  display: none;
+  display:none;
   position: absolute;
   overflow: hidden;
   width: 900px;
