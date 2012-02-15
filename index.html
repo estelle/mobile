@@ -558,7 +558,7 @@ Images <big>1024px</big> or bigger are too <big>big</big> for memory</p>
   background-image:url(images/frame.jpg);
   -webkit-mask: url(images/framemask.png); 
 }</pre>
-     <footer><a href="masking.html">Masking Example</a></footer>
+     <footer><!--<a href="masking.html">Masking Example</a>--></footer>
      </section>
     </div>  
   
@@ -720,50 +720,6 @@ Images often faster than Gradients</li>
      </section>
     </div>
        
-<!-- Hardware Acceleration Theorem 
-<div class="slide normal theorem" style="background-image:url(images/beer.png); background-position: 98% 53%; background-size: 400px;">
-      
-     <section>
-     <h1 class="fontfun"> Hardware Accelerations: 3D Transform</h1>
-     
-         <p  style="border-bottom:1px solid; font-weight:bold; margin-top: 20px;">Theorem</p>  
-         <p class="fontfun">
-            As hardware acceleration provides for better performance and smooth animation, use hardware acceleration <strong>everywhere</strong>.</p>
-         <p  style="border-bottom:1px solid; font-weight:bold; margin-top: 20px;">Given</p>
-         <p class="fontfun">
-         hardware accelerated == composited<br>
-         composited  == Image in memory <br>
-         Image in memory == <code style="font-weight:bold">H x W x 4</code>.</p>
-         <p  style="border-bottom:1px solid; font-weight:bold; margin-top: 20px; color:magenta">Disproven</p>
-         <p class="fontfun">Composited elements can <strong>suck up memory</strong></p>
-         <p  style="border-bottom:1px solid; font-weight:bold; margin-top: 20px;">Conclusion:</p>
-         <p class="fontfun">
-         Take advantage of hardware acceleration, but don't abuse it. GPU accelerated elements eat video <strong>memory</strong>. 
-         </p>
-     </section>
-    </div>
--->      
-
-
-<!-- About:flags
-<div class="slide normal" style="background-image:url(images/chromflags.gif);">
-    <header>
-        <h1>Inspecting Composited Layers</h1>
-    </header> 
-    <section> 
-    <div class="whitened" style="box-shadow: 0 0 0 3px rgba(0,0,0,0.3); margin:10px; box-sizing:padding-box; width:90%;">       
-<p style="margin: 10px 0 50px 0;"><strong>Chrome:</strong> <br>
-Go to: <strong>chrome://flags</strong><br>
-Enable: <strong>Composited render layer borders</strong></p>
-
-
-<p><strong>iPhone Simulator: </strong><br>
-Terminal: CA_COLOR_OPAQUE=1 /Developer/Platforms/iPhoneSimulator.platform/<wbr>Developer/Applications/iPhone\ Simulator.app/Contents/MacOS/iPhone\ Simulator</p>
-</div>
-
-</section>
-</div>
-   -->       
    
     
 
@@ -944,24 +900,7 @@ but animation has to wait.</p>
 </div>
 
 
-<!-- minimize DOM
-<div class="slide normal">
-    <header>
-    	<h1>Reflow Culprits</h1>
-    </header> 
-    <section> 
-        <ul class="sevenless">
-           <li>Changing the DOM: Adding, removing, updating nodes</li>
-		   <li>Changing value of display property</li>
-		   <li>Changing a CSS property that alters a box model value</li>
-		   <li>Orientation change</li>
-         <li>zooming and scrolling on desktop, but not necessarily on mobile devices (viewport)</li>
-         <li>The larger a DOM tree, the more expensive a reflow is</li>
-         </ul>
-    </section>
-</div>
-      
- -->
+
 
 <!-- minimize DOM -->
 <div class="slide normal">
@@ -1014,21 +953,6 @@ but animation has to wait.</p>
    
 
 
-<!-- Netflix example
-<div class="slide normal" style="background-image:url(images/netflix.jpg); background-position: 50%95%;">
-    <header>
-    	<h1>Reuse the DOM</h1>
-    </header> 
-    <section class="notes"> 
-        <p style="font-size: 40px; margin:20px">Provide user <strong>feedback</strong></p>
-        <p style="font-size: 40px; margin:20px"><strong>Reuse</strong> DOM Nodes</p>
-        
-        
-        <footer>Netflix.com example</footer>
-    </section>
-</div>
-   
- -->
 
 
 <div class="slide intro"  style="background-image:url(images_old/bandaid.png), url(images/broken-lcd.jpg); background-size: 300px, cover; background-position: 75% 27%,top right"> 
