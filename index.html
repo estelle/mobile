@@ -1,0 +1,1182 @@
+<!doctype HTML>
+<html> 
+  <head> 
+    <meta charset="utf-8" />
+    <title>Mobile UI Performance</title>
+    <style>
+    iframe {display: none;}
+    .current iframe {display: inherit;}
+</style>
+<link href="velocity3.css" rel="stylesheet" media="projection, screen">
+
+</head> 
+<body> 
+<header>
+<nav>
+<ul>
+	<li class="button cancel" id="back">Back</li>
+    <li class="button done" id="next">Next</li>
+</ul>
+<h1>Mobile UI Performance</h1>
+</nav>
+</header>
+
+  <div id="presentation">
+   <div id="presentation-counter"></div> 
+   
+   <div id="slides">
+
+
+<!-- Title Slide -->
+<div class="slide normal" style="background-image:url(images/broken-lcd.jpg); background-size:cover; background-position: top right">
+     <header>
+      
+     </header> 
+      
+       <section>
+            <p style="float: left; margin-right: 20px;"><a href="http://www.sitepoint.com/books/htmlcss1/" style=" border:none;float:left"><img src="http://www.sitepointstatic.com/images/books/htmlcss1/3dcover-flat.png" alt="HTML5 &amp; CSS3 for the Real World" style="border:none; width: 180px; "></a><br/>
+            <a href="http://shop.oreilly.com/product/0636920021711.do" style="clear:both; float: left; border:none"><img src="images/oreilly.gif" alt="Mobile HTML5: Using the Latest Today by Estelle Weyl and Maximiliano Firtman"></a>
+            
+            
+            <br style="clear:both;">Name: Estelle Weyl
+			<br>Blog: <a href="http://standardista.com">standardista.com</a>
+            <br>Twitter: <a href="http://twitter.com/estellevw">@estellevw</a></p>
+            <h1 style="font-size: 400%; color: #E65F00" >Mobile: Don't Break the Web</h1>
+            <footer>Photo: <a href="http://www.hdwallpapers4ipad.com/photo/abstract_backgrounds/broken_screen/2-0-1568">hdwallpapers4ipad.com</a></footer>
+          </section>
+    </div> 
+    
+
+<!-- Fast -->
+<div class="slide normal" style="background-image:url(images_old/fast.jpg); background-size:cover;">
+     <header>
+     <h1 style="color:#fff; font-size: 80px; -webkit-text-stroke: 1px yellow">Fast to ....
+</h1>
+     </header> 
+     <section style="height:550px">
+     <ul style="color:#fff; -webkit-transform:translateY(-10px); list-style-type: none; -webkit-text-stroke: 1px yellow">
+     	<li style="font-size: 50px; font-weight: bold; -webkit-transform:translate(60px, 0px)">Load</li>
+     	<li style="font-size: 50px; font-weight: bold; -webkit-transform:translate(450px, 10px)">Render</li>
+        <li style="font-size: 50px; font-weight: bold; -webkit-transform:translate(160px, 180px);">Respond</li>
+        <li style="font-size: 50px; font-weight: bold; -webkit-transform:translate(500px, 200px);">Understand</li>
+        </ul>
+        
+     <ul style="color:#fff; margin-top: 150px;">
+        <li  class="notes">Beautiful</li>
+        <li class="notes">Useful</li>
+        <li class="notes">Eco-friendly</li>
+     </ul>
+     <footer><a href="http://www.mypcwallpaper.com/wp-content/uploads/2011/02/running_cheetah_wallpaper1.jpg">mypcwallpaper.com</a></footer>
+     </section>
+     </div>
+     
+
+<!--YSLOW -->
+<div class="slide normal">
+     <header>
+      <h1>YSLOW<img src="images/yslow.png" alt="" style="vertical-align:middle;  margin-left: 20px;"></h1>
+     </header> 
+     <section> 
+     <ul class="visibility">
+<li>Make fewer HTTP requests
+<p class="hidenotes">Decreasing the number of components on a page reduces the number of HTTP requests required to render the page, resulting in faster page loads. Some ways to reduce the number of components include: combine files, combine multiple scripts into one script, combine multiple CSS files into one style sheet, and use CSS Sprites and image maps.</p></li>
+
+<li>Avoid empty src or href
+<p class="hidenotes">You may expect a browser to do nothing when it encounters an empty image src. However, it is not the case in most browsers. IE makes a request to the directory in which the page is located; Safari, Chrome, Firefox 3 and earlier make a request to the actual page itself. This behavior could possibly corrupt user data, waste server computing cycles generating a page that will never be viewed, and in the worst case, cripple your servers by sending a large amount of unexpected traffic.</p></li>
+     
+<li>Compress components with gzip
+<p class="hidenotes">Compression reduces response times by reducing the size of the HTTP response. Gzip is the most popular and effective compression method currently available and generally reduces the response size by about 70%. Approximately 90% of today's Internet traffic travels through browsers that claim to support gzip.</p></li>
+
+
+<li>Put CSS at top 
+<p class="hidenotes">Moving style sheets to the document HEAD element helps pages appear to load quicker since this allows pages to render progressively.</p></li>
+
+<li>Put JavaScript at bottom
+ <p class="hidenotes">JavaScript scripts block parallel downloads; that is, when a script is downloading, the browser will not start any other downloads. To help the page load faster, move scripts to the bottom of the page if they are deferrable.</p></li>
+ 
+<li>Avoid CSS expressions
+<p class="hidenotes">CSS expressions (supported in IE beginning with Version 5) are a powerful, and dangerous, way to dynamically set CSS properties. These expressions are evaluated frequently: when the page is rendered and resized, when the page is scrolled, and even when the user moves the mouse over the page. These frequent evaluations degrade the user experience.
+</p></li>
+
+<li>Reduce DNS lookups
+<p class="hidenotes">The Domain Name System (DNS) maps hostnames to IP addresses, just like phonebooks map people's names to their phone numbers. When you type URL www.yahoo.com into the browser, the browser contacts a DNS resolver that returns the server's IP address. DNS has a cost; typically it takes 20 to 120 milliseconds for it to look up the IP address for a hostname. The browser cannot download anything from the host until the lookup completes.
+</p></li>
+
+<li>Minify JavaScript and CSS
+<p class="hidenotes">
+Minification removes unnecessary characters from a file to reduce its size, thereby improving load times. When a file is minified, comments and unneeded white space characters (space, newline, and tab) are removed. This improves response time since the size of the download files is reduced.
+</p></li>
+
+<li>Avoid URL redirects
+<p class="hidenotes">
+URL redirects are made using HTTP status codes 301 and 302. They tell the browser to go to another location. Inserting a redirect between the user and the final HTML document delays everything on the page since nothing on the page can be rendered and no components can be downloaded until the HTML document arrives.
+</p></li>
+
+<li>Remove duplicate JavaScript and CSS
+<p class="hidenotes">
+Duplicate JavaScript and CSS files hurt performance by creating unnecessary HTTP requests (IE only) and wasted JavaScript execution (IE and Firefox). In IE, if an external script is included twice and is not cacheable, it generates two HTTP requests during page loading. Even if the script is cacheable, extra HTTP requests occur when the user reloads the page. In both IE and Firefox, duplicate JavaScript scripts cause wasted time evaluating the same scripts more than once. This redundant script execution happens regardless of whether the script is cacheable.
+</p></li>
+<li> Reduce the number of DOM elements
+<p class="hidenotes">
+A complex page means more bytes to download, and it also means slower DOM access in JavaScript. Reduce the number of DOM elements on the page to improve performance.</p>
+</li>
+
+<li>Avoid HTTP 404 (Not Found) error
+<p class="hidenotes">Making an HTTP request and receiving a 404 (Not Found) error is expensive and degrades the user experience. Some sites have helpful 404 messages (for example, "Did you mean ...?"), which may assist the user, but server resources are still wasted.</p></li>
+
+
+<li> Avoid AlphaImageLoader filter
+ <p class="hidenotes">The IE-proprietary AlphaImageLoader filter attempts to fix a problem with semi-transparent true color PNG files in IE versions less than Version 7. However, this filter blocks rendering and freezes the browser while the image is being downloaded. Additionally, it increases memory consumption. The problem is further multiplied because it is applied per element, not per image.
+</p>
+</li>
+
+<li>Do not scale images in HTML
+ <p class="hidenotes">Web page designers sometimes set image dimensions by using the width and height attributes of the HTML image element. Avoid doing this since it can result in images being larger than needed. For example, if your page requires image myimg.jpg which has dimensions 240x720 but displays it with dimensions 120x360 using the width and height attributes, then the browser will download an image that is larger than necessary.</p></li>
+
+<li>Make favicon small and cacheable
+<p class="hidenotes">A favicon is an icon associated with a web page; this icon resides in the favicon.ico file in the server's root. Since the browser requests this file, it needs to be present; if it is missing, the browser returns a 404 error (see "Avoid HTTP 404 (Not Found) error" above). Since favicon.ico resides in the server's root, each time the browser requests this file, the cookies for the server's root are sent. Making the favicon small and reducing the cookie size for the server's root cookies improves performance for retrieving the favicon. Making favicon.ico cacheable avoids frequent requests for it.
+</p>
+</li>
+</ul>
+     <footer>Click item for more info. Link: <a href="http://developer.yahoo.com/yslow/">YSlow</a></footer>
+     </section>
+    </div> 
+    
+    
+
+<!-- Page Speed -->
+<div class="slide normal"> 
+     <header>
+     	<h1>Page Speed <img src="images/pagespeed.png" alt="" style="vertical-align:middle; margin: 0 0 0 20px" ></h1>
+     </header> 
+     <section class="content columns"> 
+       <ul>
+       		<li>Leverage browser caching</li>
+            <li>Enable compression</li>
+            <li>Defer parsing of JavaScript</li>
+            <li>Minimize request size</li>
+            <li>Specify a cache validator</li>
+            <li>Optimize images</li>
+            <li>Minify JavaScript</li>
+            <li>Minify HTML</li>
+            <li>Specify image dimensions</li>
+            <li>Specify a character set</li>
+            <li>Specify a Vary: Accept-Encoding header</li>
+            <li>Reduce request serialization</li>
+            <li>Eliminate unnecessary reflows</li>
+            <li>Avoid long-running scripts</li>
+            <li>Avoid CSS @import</li>
+            <li>Avoid bad requests</li>
+            <li>Enable Keep-Alive</li>
+            <li>Make landing page redirects cacheable</li>
+            <li>Minify CSS</li>
+            <li>Minimize redirects</li>
+            <li>Optimize the order of styles and scripts</li>
+            <li>Put CSS in the document head</li>
+            <li>Remove query strings from static resources</li>
+            <li>Serve resources from a consistent URL</li>
+            <li>Serve scaled images</li>
+        </ul>
+     <footer><a href="http://code.google.com/speed/page-speed/">Google Page Speed Tools</a></footer>
+     </section>
+    </div>
+      
+<!-- WPO v MUIP (phones)-->
+<div class="slide intro" style="background-image: url(images_old/top-smartphones.jpg); background-position: center 90%;">
+     <header>
+     <h2>Web Performance Optimization </h2>
+     </header> 
+     <section>
+     <ul class="sevenless" style="text-align:left">
+     <li>Eliminate unnecessary reflows</li>
+     <li>Reduce the number of DOM elements</li>
+     <li>Defer parsing of JavaScript</li>
+     <li>Make fewer HTTP requests</li>
+     </ul>
+     <footer><a href="http://top10ofall.com/top-10-best-smartphones/">Photo Credit</a></footer>
+     </section>
+     </div>
+   
+<!-- Rules that help (scooter)-->
+<div class="slide normal" style="background-image:url(images/carscooter.jpg); background-position: center bottom; background-size:contain;">
+     <header>
+      <h1>
+Mobile UI Performance</h1>
+     </header> 
+     <section> 
+     
+     <p style="margin-top:20px;">Both get you where you need to go, <br>but they do it differently, and <br>have a different purpose</p>
+  <footer style="text-align: right;">What happens on the device is as important as<br> what happens over the air</footer>
+     </section>
+       </div>
+ 
+<!-- Cache and Persistent Memory 
+<div class="normal slide">
+  <header><h1>Phones aren't Laptops</h1></header>
+  <section>
+    <p>Cache size for Mobile Browsers/Devices</p>
+    <table class="th"> 
+    <thead><tr>
+          <th>OS / Ver</th>
+          <th><img src="images/apple.png" width="50" alt="apple" align="absmiddle" /> 4.3</th>
+          <th><img src="images/android.png" width="50" alt="android" align="absmiddle" /> 2.2</th>
+          <th><img src="images/android.png" width="50" alt="android" align="absmiddle" /> 2.3</th>
+          <th><img src="images/blackberry.png" width="50" alt="blackberry" align="absmiddle" /> 6</th>
+        </tr>
+        </thead>
+      <tbody>
+      
+       
+        <tr>
+          <th>Persistent</th>
+          <td><strong>0</strong></td>
+          <td><strong>4</strong> MB</td>
+          <td><strong>4</strong> MB</td>
+          <td><strong>25</strong> MB</td>
+        </tr>
+        <tr>
+          <th>Memory</th>
+          <td><strong>100</strong> MB</td>
+          <td><strong>4</strong> MB</td>
+          <td><strong>4</strong> MB</td>
+          <td><strong>25</strong> MB</td>
+        </tr>
+      </tbody>
+    </table>
+    <ul class="sevenless" style="margin:40px 0 ">
+    <li style="line-height:1.2">Persistent cache means after restarting the process or power-cycling the device. 
+      </li><li style="line-height:1.2">
+      Memory cache also applies to locking the screen or using other apps 
+     </li>
+     <li style="line-height:1.2">Blu-rays, game consoles, etc., can be even more limited</ul>
+     
+     <div id="ball">
+     	<div></div>
+     </div>
+      <footer><a href="http://www.blaze.io/mobile/understanding-mobile-cache-sizes/#lockscreen">blaze.io</a></footer>
+  </section>
+  </div>
+       -->
+<!-- Table of Contents -->
+<div class="slide normal" style="background-image:url(images_old/telephonecans.jpg); background-position:80% bottom; background-repeat:no-repeat;">
+     <header>
+      <h1>Device limitations!</h1>
+      
+     </header> 
+     <section>
+     <ul class="sevenless">
+        <li>Battery Life</li>
+     	<li>Latency</li>
+        <li>Memory</li>
+        <li>UI responsiveness</li>
+     </ul>
+     <h2>Phones aren't Laptops</h2>
+     </section>
+    </div>
+        
+<!-- BATTERY -->
+<div class="slide normal">
+     <header>
+      <h1>Battery</h1>
+     </header> 
+     <section style="background-image:url(images_old/carbattery.jpeg) , url(images_old/battery.jpg); background-position: bottom left, 80% 90%; background-size: auto, 130px;height:600px;"> 
+     
+     </section>
+    </div>
+    
+            
+<!-- Battery consumption -->
+<div class="slide normal" style="background-image:url(images_old/batteries.jpg); background-size: cover;">
+     <header>
+      <h1 style="color: #ffffff; font-size: 80px; -webkit-text-stroke: 1px #F00;">Battery Consumption</h1>
+     </header> 
+     <section>
+     <div  class="whitened" style="float: none; background-color: rgba(255,255,255,0.8); padding:20px;  margin-bottom: 40px; ">
+     <p>CPU Drains the battery. Avoid using it!</p>
+     <ul class="sevenless">
+     	<li>Avoid Repaints</li>
+     	<li>Minimize JavaScript (size and activity)</li>
+     	<li>No JavaScript Animations</li>
+        <li>Avoid WebGL</li>
+        <li>Implement what you learn today</li>
+     </ul>
+     </div>
+     <p  class="whitened blink" style="float: none;  background-color: rgba(255,255,255,0.8); padding:20px;">Let your device take long, long breaks! </p>
+     <footer>Image Credit: <a href="http://naiksaneet.wordpress.com">naiksaneet.wordpress.com</a></footer>
+     </section>
+    </div>
+
+<!-- TERM:  Latency -->
+<div class="slide intro" style="background-image:url(images_old/latencykills.jpg); background-position: bottom;">
+     <header>
+      <h1>Latency</h1>
+     </header>
+     <section> 
+     <footer>Photo: <a href="http://www.flickr.com/photos/tby/1472668838/">T Bryce Yehl</a></footer>
+     </section>
+    </div>
+  
+<!-- Normal DNS -->
+<div class="slide normal">
+     <header>
+      <h1>DNS / HTTP Requests </h1>
+     </header> 
+     <section>
+     <img src="images/simpledns.gif" style="margin: 40px auto; display: block" alt="COmputer asks DNS server for IP address, then goes to IP to get website" />
+     <p style="text-align:center; position:absolute; bottom: 40px; width: 100%;">Each host is a different lookup!!</p>
+     </section>
+    </div>
+    
+<!-- Mobile DNS -->
+<div class="slide normal">
+    <header>
+    	<h1>Latency</h1>
+    </header> 
+    <section>
+        <img src="images/latency.gif" style="margin: 40px auto" alt="COmputer asks DNS server for IP address, then goes to IP to get website" />
+        <ul class="notes">
+            <li><strong>Issue:</strong> Requests take longer to complete</li>
+            <li><strong>Solution:</strong> Reducing requests improves performance</li>
+            <li><strong>Web Standards AntiPattern:</strong> Embed CSS and JS (<a href="http://m.bing.com">m.Bing.com</a>)</li>
+        </ul>
+    </section>
+</div>
+
+<!-- Naught: Embedded Scripts -->
+<div class="slide normal" style="background-image:url(images_old/babies.jpg); background-size: cover;">
+    <header>
+    	<h1>Anti-pattern: Embedded CSS &amp; JS </h1>
+    </header> 
+    <section> 
+        <ul class="sevenless" style="margin-top: 100px">
+        	<li>On first page only</li>
+            <li>Save in LocalStorage</li>
+            <li>No re-fetch: use Cookies</li>
+        </ul> 
+    <footer>Photo: <a href="http://www.hiren.info/desktop-wallpapers/babies-pictures/naughty-baby-sleeping-style">Hiren.info</a></footer>
+    </section>
+</div>
+
+<!-- Bing process -->
+<div class="slide normal" style="background-image:url(images_old/bing.jpg); background-position: 15% 50%;">
+    <header>
+    	<h1>m.bing.com: One HTTP request</h1>
+    </header> 
+    <section style="padding-left: 350px">
+    
+       <img src="images/bingkb2.gif" alt="203.70KB on first load to 15.29KB for subsequent pages" style="margin: 40px 100px;"/> 
+       <p>Embedded CSS &amp; JS with data-*</p>
+       <p>Data URI's for images</p>
+       <p class="notes">Automated Data URI creation: <a href="http://github.com/nzakas/embed">github.com/nzakas/embed</a></p>
+    </section>
+</div>
+
+
+<!-- Naughty: Bing Rules -->
+<div class="slide normal" style="background-image:url(images_old/hamburger.jpg); background-position: 98% 95%;">
+    <header>
+    	<h1>Naughty but Nice</h1>
+    </header> 
+    <section> 
+    
+        <ul class="sevenless">
+        	<li>Embed CSS &amp; JS for 1st page load</li>
+            <li>Extract &amp; put in LocalStorage</li>
+            <li>Set Cookies with script names</li>
+            <li>Next GET: cookies checked</li>
+            <li>Only embed new scripts</li>
+            <li>Load localStorage resources on load</li>
+        </ul>
+        <p style="font-weight:bold; letter-spacing:-2px; text-shadow:0 0 3px white;">Single http request for html, css, js &amp; images</p>
+        <footer>Photo: <a href="http://s440.photobucket.com/profile/cdma69/index">cdma69</a></footer> 
+    </section>
+</div>
+
+<!-- TERM: Memory -->
+<div class="slide intro" style="background-image:url(images_old/memory.gif); background-position:center bottom; background-color:black;">
+    <header>
+    	<h1 style="color: #fff">Memory</h1>
+    </header> 
+    <section class="normal" style="padding-top: 200px;">
+    	<p class="notes" style="color: #fff">High memory usage causes a slow UI</p>
+    	<p class="notes" style="color: #fff">When you are out of memory, you are out of memory</p>
+        <p class="notes" style="color: #fff">Browser crashes to free up memory</p>
+    </section>
+</div>
+      
+<!-- Device Memory: CPU comparison -->
+<div class="slide normal"> 
+ <header><h1>Memory</h1></header> 
+ <section> 
+    <table class="rowed">
+    <thead>
+    <tr>
+        <th>Device</th>
+        <th>Memory</th><th></th>
+    </tr>
+    </thead>
+    <tbody>
+        <tr><td>iPhone 3G</td><td>128MB</td><td rowspan="6"><img src="images/iphone.jpg" width="40" alt="iphone"><br>
+        <img src="images/htcinspire.jpg"width="40" alt="htc inspire"><br>
+        <img src="images/ipad.jpg"width="40" alt="iPad"></td></tr>
+        <tr><td>iPhone 3GS</td><td>256 MB</td></tr>
+        <tr><td>HTC Inspire</td><td>768 MB</td></tr>
+        <tr><td>iPad 1</td><td>256 MB</td></tr>
+        <tr><td>iPod Touch (4)</td><td>256 MB</td></tr>
+        <tr><td>MacBook Pro</td><td>8 GB</td></tr>
+    </tbody>
+    </table>
+<p class="notes" style="padding-top: 40px"><strong>Mobile Norm:</strong> 512MB of RAM, with 1GHz Processor</p>
+<p class="notes"><strong>PC Norm:</strong> 8GB+ RAM  </p>
+<h2 class="notes" class="text-align: center;">Developing without mobile in mind <br>
+leads to sloppy App Dev</h2>
+ </section>
+</div>
+   
+<!-- HTC Inspire: How much CPU is used without anything running-->
+<div class="slide normal"> 
+     <header><h1>Browser shares Memory</h1></header> 
+     <section> 
+    <table class="htc">
+    <thead><tr><td colspan="3">Running Services</td></tr></thead>
+    <tfoot><tr><td style="background-color:#FCC">Other</td><td colspan="2" style="background-color:#6C9">73MB Avail: 255MB + 182MB in 21</td></tr></tfoot>
+    <tbody>
+    	<tr><td colspan="2">Calendar</td><td>8.4MB</td></tr>
+        <tr><td colspan="3">Process:com.htc.bgp</td></tr>
+        
+    	<tr><td rowspan="2"></td><td>ObexService</td><td>31:52:14</td></tr>
+        <tr><td colspan="2">Started by application: Touch to stop</td></tr>
+        
+    	<tr><td colspan="2">AT&amp;T Navigator</td><td>8.4MB</td></tr>
+        <tr><td colspan="3">Process: com.telnav.app.android.congular</td></tr>
+        
+    	<tr><td rowspan="2"></td><td>ResoucePreLoader</td><td>Restarting</td></tr>
+        <tr><td colspan="2">Started by application: Touch to stop</td></tr>
+        
+        
+    	<tr><td colspan="2">AT&amp;T Spots</td><td>2.4MB</td></tr>
+        <tr><td colspan="3">Process: com.matchboxmobile.wasp</td></tr>
+        
+    	<tr><td rowspan="2"></td><td>WispService</td><td>31:52:14</td></tr>
+        <tr><td colspan="2">Started by application: Touch to stop</td></tr>
+        
+        
+        
+    	<tr><td colspan="2">Media</td><td>4.1MB</td></tr>
+        <tr><td colspan="3">Process: android.process.media</td></tr>
+        
+    	<tr><td rowspan="2"></td><td>DownloadService</td><td>31:52:14</td></tr>
+        <tr><td colspan="2">Started by application: Touch to stop</td></tr>
+        
+    
+        
+    	<tr><td colspan="2">PVWmdrmService</td><td>2.2MB</td></tr>
+        <tr><td colspan="3">Process: com.pv.wmdrmservice</td></tr>
+        
+    	<tr><td rowspan="2"></td><td>PVWmdrmService</td><td>31:52:14</td></tr>
+        <tr><td colspan="2">Started by application: Touch to stop</td></tr>
+    </tbody>
+    </table>
+     </section>
+    </div> 
+   
+<!--GZip does not suffice -->
+<div class="slide normal">
+     <header>
+      <h1>Not enough to <big>GZip</big></h1>
+     </header> 
+     <section> 
+     
+     <p style="margin: 0 -20px;"><img src="images/gzipbig.png" alt="" style="vertical-align:middle">
+    <img src="images/arrow.png" alt="" style="vertical-align:middle">
+     <img src="images/gzipsmall.jpg" alt="" style="vertical-align:middle">
+     <img src="images/arrow.png" alt="" style="vertical-align:middle">
+     <img src="images/gzipbig.png" alt="" style="vertical-align:middle"></p>
+     <p style="text-align:center; color:red">Rendered media are still the same size.</p>
+     <ul class="sevenless">
+       <li>         Reduce File Size       </li>
+       <li>         Reduce Image Size       </li>
+       <li>         Use Data URIs       </li>
+     </ul>
+     <p class="notes">Video, Audio, Images and Text can be compressed to save bandwidth, but they're uncompressed in the browser.</p>
+     </section>
+    </div>
+    
+<!-- Reduce File Size - ImageAlpha -->
+<div class="slide normal">
+     <header>
+      <h1>Reduce File Size</h1>
+     </header> 
+     <section> 
+     
+     <img src="images/imagealpha.jpg" alt="images alpha saving 64% file size" width="700" style="margin:auto; display:block">
+     <h1>Image Alpha <img src="images/ImageAlpha_med.png" alt="" style="vertical-align:middle"></h1>
+     <footer><a href="http://pngmini.com/">www.pngmini.com/</a></footer>
+     </section>
+    </div>
+      
+     
+<!-- Reduce Image Size - Sencha IO-->
+<div class="slide normal">
+    <header>
+    	<h1>Reduce Image Size</h1>
+    </header> 
+    <section style="background:url(images_old/tinySrc.jpg) top no-repeat; min-height:500px; background-size: contain; padding:20px;"> 
+    <p style="color:#fff; padding-top: 40px; line-height: 1.4;text-shadow:1px 1px 3px #000,-1px -1px 3px #000; font-weight:bold;">Don't send <big>big</big> images to <small>small</small> screens?<br>
+Images <big>1024px</big> or bigger are too <big>big</big> for memory</p>
+    <ul style="font-size: 30px; line-height:2; color: #fff; float:left; padding: 10px; background-color: rgba(0,0,0,0.5); border-radius: 20px; margin-top: 100px; list-style-type:none;">
+        <li>http://i.tinysrc.mobi/http://mysite.com/myimage.png</li>
+        <li>http://src.sencha.io/http://mysite.com/myimage.png</li>
+        <li>http://src.sencha.io/320/480/http://mysite.com/myimage.png</li>
+    </ul>
+    <footer class="notes" style="text-align:leftl">
+    Images must &lt; 1024px (video memory limitations) else tiled in memory<br>
+ Data URIs  <a href="https://github.com/nzakas/cssembed">https://github.com/nzakas/cssembed</a> to http requests<br>&nbsp;</footer><footer>Photo: <a href="http://www.hdwallpapers4ipad.com/photo/abstract_backgrounds/broken_screen/2-0-1568">hdwallpapers4ipad.com</a></footer>	
+    </section>
+</div>
+   
+<!-- Reduce File Size - JPG not PNG, with Masking -->
+<div class="slide normal">
+     <header>
+      <h1>CSS Masking</h1>
+     </header> 
+     <section> 
+     
+     <p class="onehundred">
+     <img src="images/frame.jpg" alt="jpeg" width="160">
+     <img src="images/plus.gif" alt="plus" width="100">
+     <img src="images/framemask.png" alt="framemask" width="160">
+     <img src="images/lessthan.gif" alt="less than" width="100">
+     <img src="images/frame2.png" alt="transparent png" width="160"><br>
+     <span style="width: 160px;">88KB</span>
+     <span style="width: 100px;"> + </span>
+     <span style="width: 160px;"> 4KB </span>
+     <span style="width: 100px;"> &lt; </span>
+     <span style="width: 160px;"> 551KB</span>
+     </p>
+     <pre contenteditable>div {
+  background-image:url(images/frame.jpg);
+  -webkit-mask: url(images/framemask.png); 
+}</pre>
+     <footer><a href="masking.html">Masking Example</a></footer>
+     </section>
+    </div>  
+  
+   
+<!-- CSS3 Options -->
+<div class="slide normal">
+     <header>
+      <h1>Is CSS3 the Solution?</h1>
+     </header> 
+     <section>
+     <p style="font-weight:700">CSS3 Can save the day (! or ?)</p> 
+     <ul class="sevenless">
+        <li>rounded Corners</li>
+        <li>box-shadow</li>
+        <li>text-shadow</li>
+        <li>background-position</li>
+        <li>background-repeat</li>
+        <li>multiple background images</li>
+        <li>border-image</li>
+     	<li>gradients</li>
+     </ul>
+     
+     </section>
+    </div>
+    
+    
+<!-- CSS3 Benefits -->
+<div class="slide normal" style="background-image: url(images_old/fastrabbit.jpg); background-position:90% bottom; background-repeat:no-repeat;">
+     <header>
+      <h1>CSS3 <span style="-webkit-text-stroke: #fff 1px;">IS</span> the Solution!</h1>
+     </header> 
+     <section> 
+     <ul class="sevenless">
+        <li>Fewer HTTP Requests</li>
+        <li>Updatable</li>
+        <li>Scalable</li>
+        <li>Transitionable</li>
+        <li>Animatable</li>
+        <li>Fewer DOM Nodes</li>
+     </ul>
+     </section>
+    </div>
+   
+<!-- List of CSS properties that risk slowing you down -->
+<div class="slide normal" style="background-image:url(images_old/bugsbunny.jpg); background-size:cover">
+     <header>
+      <h1>CSS3 <span style="-webkit-text-stroke: #fff 1px;">ISN'T</span> always the Solution!</h1>
+      <h2 style="font-size: 40px">UI Features can ruin your web app</h2>
+     </header> 
+     <section>
+     <ul class="sevenless whitened" >
+     	<li>Tall Fonts</li> 
+     	<li>Box Shadow (inset)</li> 
+     	<li>Text Indent</li>
+     	<li>Gradients</li> 
+        <li>&lsquo;Non-rendered&rsquo; content</li>
+        <li>Recalculating / Repainting the UI</li>
+        </ul> <p style="font-weight:700; clear:both; ">Static images may render faster than CSS effects</p>
+    
+<footer>Disney: "The Tortoise and The Hare"</footer>
+     </section>
+    </div>
+    
+    
+       
+<!-- Tall fonts -->
+<div class="slide normal">
+     <header>
+      <h1>Fonts</h1>
+     </header> 
+     <section id="fonts">  
+       <img src="images/tallfont_02.gif" alt="Fonts with Tall Ascenders">
+       <img src="images/tallfont_03.gif" alt="Fonts with Tall Ascenders">
+       <img src="images/tallfont_04.gif"  alt="Fonts with Tall Ascenders"> 
+       <img src="images/tallfont_05.gif"  alt="Fonts with Tall Ascenders">
+       <footer class="notes">Fonts: Zapfino, Helvetica, Savoye<br>
+		Amount of space painted is large!</footer>
+         
+       </section>
+    </div>
+    
+<!-- Shadows -->
+<div class="slide normal" style="background-image: url(images_old/insetshadow.jpg); background-size: 70%; background-position:50% 87%">
+     <header>
+      <h1>Shadows</h1>
+     </header> 
+     <section>
+     <ul class="sevenless">
+    <li>Not rendered as static bitmap</li>
+    <li>Evaluated  each repaint</li>
+     </ul>
+     <footer class="notes">Render order: rendered from back to front</footer>
+     </section> 
+    </div>
+    
+<!-- Text-indent -->
+<div class="slide normal" style="background-image:url(images/medium_phone.jpg); background-position: 600px 100px;">
+     <header>
+      <h1>Text-indent</h1>
+     </header> 
+     <section>
+     <div style="position:absolute; left: 40px; top: 240px; padding:5px;">MyLogo Text</div>
+     <div style="position:absolute; left: 660px; top: 240px; border-radius:50%; background-color:#F39; color:#fff; padding:5px;">Logo</div>
+     <div style="position:absolute; left: 40px; top: 230px; width: 740px; height:80px; border: 2px dashed #ccc;"></div>
+     
+     <ul class="sevenless" style="margin-top:300px">
+     	<li>Use CSS Clip</li>
+        <li>Position text up instead of left</li>
+        
+     </ul>
+     </section> 
+    </div>     
+          
+<!-- Gradients - light burst -->
+<div class="slide normal" style="padding:0; overflow:hidden" id="bursts">
+     <object data="bursts.html" style="height:100%; width:100%; border-radius: 18px">
+     <header>
+      <h1>Gradients</h1>
+     </header> 
+     <section>
+     <a href="bursts.html" target="_blank">See Redial Gradients in Action</a>
+     </section>
+     </object>
+    </div>    
+    
+        
+<!-- Gradients -->
+<div class="slide normal" id="largegradient">
+     <header>
+      <h1>Large Gradients</h1>
+     </header> 
+     <section>
+     <ul class="sevenless" style="width: 550px"><img src="images/iphonered.png" alt="iphone with large gradient" style="position: absolute; top: 70px; left: 586px"/>
+     	<li>Keep gradients small</li>
+        <li>Requires CPU to create</li>
+        <li>Stored in memory</li>
+        <li>Memory: Radial >  Linear </li>
+        <li>Render Speed: <br>
+Images often faster than Gradients</li>
+     </ul>
+     
+     </section>
+    </div>
+    
+    
+<!-- 3D Transforms -->
+<div class="slide normal" style="background-image:url(images_old/panacea.png); background-position: 50% 65%;">
+     <header>
+      <h1>Hardware Acceleration: 3d Transforms</h1>
+     </header> 
+     <section>
+<pre contenteditable> div {
+	transform: translateZ(0);
+ }</pre>
+     
+     <h1>translateZ(0)</h1>
+     <p style="margin-top: 220px;">Composited mage in memory == <code style="font-weight:bold">H x W x 4</code></p>
+     <p>Take advantage of hardware acceleration, but don't abuse it. GPU accelerated elements eat video <strong>memory</strong></p>
+     </section>
+    </div>
+       
+<!-- Hardware Acceleration Theorem 
+<div class="slide normal theorem" style="background-image:url(images/beer.png); background-position: 98% 53%; background-size: 400px;">
+      
+     <section>
+     <h1 class="fontfun"> Hardware Accelerations: 3D Transform</h1>
+     
+         <p  style="border-bottom:1px solid; font-weight:bold; margin-top: 20px;">Theorem</p>  
+         <p class="fontfun">
+            As hardware acceleration provides for better performance and smooth animation, use hardware acceleration <strong>everywhere</strong>.</p>
+         <p  style="border-bottom:1px solid; font-weight:bold; margin-top: 20px;">Given</p>
+         <p class="fontfun">
+         hardware accelerated == composited<br>
+         composited  == Image in memory <br>
+         Image in memory == <code style="font-weight:bold">H x W x 4</code>.</p>
+         <p  style="border-bottom:1px solid; font-weight:bold; margin-top: 20px; color:magenta">Disproven</p>
+         <p class="fontfun">Composited elements can <strong>suck up memory</strong></p>
+         <p  style="border-bottom:1px solid; font-weight:bold; margin-top: 20px;">Conclusion:</p>
+         <p class="fontfun">
+         Take advantage of hardware acceleration, but don't abuse it. GPU accelerated elements eat video <strong>memory</strong>. 
+         </p>
+     </section>
+    </div>
+-->      
+
+
+<!-- About:flags
+<div class="slide normal" style="background-image:url(images/chromflags.gif);">
+    <header>
+        <h1>Inspecting Composited Layers</h1>
+    </header> 
+    <section> 
+    <div class="whitened" style="box-shadow: 0 0 0 3px rgba(0,0,0,0.3); margin:10px; box-sizing:padding-box; width:90%;">       
+<p style="margin: 10px 0 50px 0;"><strong>Chrome:</strong> <br>
+Go to: <strong>chrome://flags</strong><br>
+Enable: <strong>Composited render layer borders</strong></p>
+
+
+<p><strong>iPhone Simulator: </strong><br>
+Terminal: CA_COLOR_OPAQUE=1 /Developer/Platforms/iPhoneSimulator.platform/<wbr>Developer/Applications/iPhone\ Simulator.app/Contents/MacOS/iPhone\ Simulator</p>
+</div>
+
+</section>
+</div>
+   -->       
+   
+    
+
+<!-- Non-rendered: Carousel example -->
+<div class="slide normal">
+    <header>
+    	<h1>Out of viewport content</h1>
+    </header> 
+    <section>
+        <img src="images/carousel.jpg" alt="Elements not currently in view are still rendered" style="display:block; margin:50px auto;"/>
+        <ul class="sevenless">
+            <li>Everything is rendered*</li> 
+            <li>On screen even if out of viewport</li>
+        </ul>
+        <pre contenteditable>&lt;meta name="viewport" content="width=320; 
+initial-scale=1.0; maximum-scale=1.0; user-scalable=0;" /&gt;</pre>
+    </section> 
+</div>  
+    
+<!-- Header - UI Responsiveness -->
+<div class="slide normal" style="background-image: url(images_old/clock.jpg); background-size:cover;">
+<header>
+<h1>UI responsiveness</h1>
+</header> 
+<section>
+<footer>Photo: <a href="http://iblogo.com">iblogo.com</a></footer> 
+</section>
+</div>
+
+<!-- touch events -->
+<div class="slide normal" style="background-image:url(images_old/gestures.gif); background-size:80%; background-position: 50% 90%" onClick="this.querySelector('section ul').style.visibility ='visible';">
+<header>
+<h1>Touch Events</h1>
+</header> 
+<section> 
+<ul  class="sevenless" style="visibility:hidden; text-shadow: 2px 2px 2px rgba(0,0,0,0.4);  margin-top: 150px; background-color:rgba(255,240,230,0.8);" > 
+    <li>Touch Event: 300ms delay</li>
+    <li>Extra touches aren't forgotten</li>
+    <li>co-opt with touch events with JS</li>
+</ul>
+<footer>Credit: <a href="http://www.lukew.com/touch/TouchGestureGuide.pdf">Luke W.</a></footer>
+</section>
+</div>
+    
+<!-- Steps for responsive UI -->
+<div class="slide normal" style="background-image:url(images_old/touch.gif) , url(images_old/thumbup.jpg) , url(images_old/butler.jpg); background-position: 5% bottom, 45% 95%, 95% 98%">
+<header>
+<h1>Responsive UI</h1>
+</header> 
+<section> 
+
+<ol>
+<li>Accept input</li>
+<li>Provide user feedback</li>
+<li>Update the UI</li>
+</ol>
+</section>
+</div>
+
+<!-- JS Listeners -->
+<div class="slide normal" style="background-image:url(images_old/queue.jpg); background-size:cover;">
+<header>
+	<h1>JavaScript affects UI</h1>
+</header> 
+<section><div class="notes whitened"> 
+    <h2>UI/JS is Single Threaded</h2>
+<p>UI Queue</p>
+<ul class="sevenless">
+	<li>JavaScript execution</li>
+    <li>UI Updates</li>
+</ul>
+<p>UI will not update while JS is being executed</p>
+</div>
+<footer>Image Credit: <a href="http://www.onlylink.net/english/?cataid=2">OnlyLink.net</a></footer>
+</section>
+</div>
+
+
+<!-- WARNING: ANIMATION -->
+<div class="slide normal">
+<header>
+	<h1 style="font-size: 68px; margin-top:60px;">
+    <span class="good">✔</span>Always use<br>
+CSS for Animation<br>
+<br>
+<span class="rate bad">✘</span>Never use<br>
+JS for Animation</h1>
+</header> 
+
+</div>
+
+
+<!-- Animation -->
+<div class="slide normal" id="animation">
+<div id="flakes">
+  	 <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+  </div>
+<header>
+<h1>Animation</h1>
+</header> 
+<section> 
+<h1>Animation = UI's lowest priority</h1> 
+<div style="margin-top: 100px;" class="whitened">
+<p>&lsquo;animation-delay&rsquo; expires even if UI thread is busy, <br>
+but animation has to wait.</p>
+<p style="margin-top: 30px">Solutions: 
+	<ul class="sevenless">
+    	<li>delay in keyframes instead of animation-delay</li>
+        <li>change parent class to add in animations and delays</li>
+    </ul>
+</p>
+</div>
+</section>
+</div>
+    
+<!-- Repaint v. Reflow -->
+<div class="slide normal">
+    <header>
+    	<h1 style="visibility:hidden">Repaint v. Reflow</h1>
+    </header> 
+    <section> 
+        <p class="rate good"><span>✔</span> Repaint</p>
+        <p class="rate bad"><span>✘</span> Reflow</p>
+    </section>
+</div>
+  
+<!-- Repaint -->
+<div class="slide normal" style="background-image:url(images_old/paintbrush.jpg); background-size:cover;">
+     <header>
+      <h1 style="color:#fff">Repaint</h1>
+     </header> 
+     <section style="margin:120px 40px 0 30px;" class="whitened"> 
+     <p>When visual changes do NOT require recalculation of layout</p>
+     <ul class="sevenless">
+     	<li>Visibility</li>
+        <li>Colors</li>
+        <li>Transforms</li>
+        <li>Background images</li>
+        <li>Transparency</li>
+     </ul>
+     <footer>Photo: <a href="http://www.flickr.com/photos/chanbliss/3334163612/">Chanbliss</a></footer>
+     </section>
+    </div>
+    
+        
+<!-- Reflorw -->
+<div class="slide normal" style="background-image:url(images_old/stream.jpg); background-size: cover;">
+    <header>
+        <h1 style="color:#fff">Reflow</h1>
+    </header> 
+    <section style="margin:0px 40px 0 30px;" class="whitened"> 
+        <p>When visual changes REQUIRE recalculation of layout</p>
+        <ul class="sevenless">
+        	<li>Page load, Layout &amp; orientation change</li>
+            <li>DOM Changes: Adding, removing, updating nodes</li>
+            <li>JS style information request</li>
+		   	<li>Changing value of display property</li>
+		   	<li>Changing to CSS property alters box model value</li>
+         	<li style="line-height:1">Resizing, zooming and scrolling (desktop), but not necessarily on mobile devices (viewport)</li>
+         	
+        </ul>
+        <ul class="notes">
+        <li>The larger a DOM tree, the more expensive a reflow is</li>
+        <li>Opera lists repaint and reflow as one of the 3 main contributors to sluggishness</li>
+        <li>Reflow of an element causes the subsequent reflow of all child and ancestor elements as well as any elements following it in the DOM.</li></ul>
+        <footer>Photo: <a href="http://www.alaskaadventures.com">Alaska Adventures</a></footer>
+    </section>
+</div>
+
+<!-- Reflow video --> 
+<div class="slide normal">
+    <header>
+        <h1>Reflow</h1>
+    </header> 
+    <section>        
+<iframe width="560" height="420" src="http://www.youtube.com/embed/dndeRnzkJDU" frameborder="0" style="display: block; margin:60px auto" allowfullscreen></iframe>
+</section>
+</div>
+
+
+<!-- minimize DOM
+<div class="slide normal">
+    <header>
+    	<h1>Reflow Culprits</h1>
+    </header> 
+    <section> 
+        <ul class="sevenless">
+           <li>Changing the DOM: Adding, removing, updating nodes</li>
+		   <li>Changing value of display property</li>
+		   <li>Changing a CSS property that alters a box model value</li>
+		   <li>Orientation change</li>
+         <li>zooming and scrolling on desktop, but not necessarily on mobile devices (viewport)</li>
+         <li>The larger a DOM tree, the more expensive a reflow is</li>
+         </ul>
+    </section>
+</div>
+      
+ -->
+
+<!-- minimize DOM -->
+<div class="slide normal">
+    <header>
+    	<h1>Minimize the DOM</h1>
+    </header> 
+    <section> 
+        <ul class="sevenless">
+            <li>Minimize number of nodes
+            	<ul class="notes">
+                	<li>Uses up memory</li>
+                    <li>Measures each node for each repaint</li>
+                </ul></li>
+            <li>Cache DOM lookups
+            <ul class="notes">
+                	<li>Store them!</li>
+                </ul>
+            </li> 
+            <li>Minimize DOM manipulations
+            	<ul class="notes">
+                	<li>Batch DOM queries &amp; DOM manipulations separately </li>
+                </ul>
+            </li>
+        </ul>
+         <p class="notes" style="margin-top:50px">More nodes = more expensive! </p>
+        
+    </section>
+</div>
+      
+      
+<!-- reuse DOM -->
+<div class="slide normal" style="background-image:url(images/trashcan.jpg); background-position: 5% 95%;">
+    <header>
+    	<h1>Reuse the DOM</h1>
+    </header> 
+    <section> 
+        <p style="font-size: 40px; margin:20px"><strong>Pool</strong> Elements and Objects</p>
+        <p style="font-size: 40px; margin:20px"><strong>Reuse</strong> instead of Allocate and Destroy</p>
+        <img src="images/tetris.gif" alt="tetris" style="float:right;"/>
+        <ol class="">
+        	<li style="line-height:1.3">Create a pool of DOM elements (more than you need)</li>
+            <li>Use the nodes you created</li>
+            <li>Release back into pool</li>
+            <li>Go to step 2</li>
+        </ol>
+    </section>
+</div>
+   
+
+   
+
+
+<!-- Netflix example
+<div class="slide normal" style="background-image:url(images/netflix.jpg); background-position: 50%95%;">
+    <header>
+    	<h1>Reuse the DOM</h1>
+    </header> 
+    <section class="notes"> 
+        <p style="font-size: 40px; margin:20px">Provide user <strong>feedback</strong></p>
+        <p style="font-size: 40px; margin:20px"><strong>Reuse</strong> DOM Nodes</p>
+        
+        
+        <footer>Netflix.com example</footer>
+    </section>
+</div>
+   
+ -->
+
+
+<div class="slide intro"  style="background-image:url(images_old/bandaid.png), url(images/broken-lcd.jpg); background-size: 300px, cover; background-position: 75% 27%,top right"> 
+     <header><h1 style="font-size: 250%">Other Tips</h1></header> 
+     <section class="content"> 
+     <footer>Photo: <a href="http://www.hdwallpapers4ipad.com/photo/abstract_backgrounds/broken_screen/2-0-1568">hdwallpapers4ipad.com</a></footer>
+     </section>
+ </div>
+
+<!-- Testing -->
+<div class="slide normal">
+    <header>
+    	<h1>Test in Real Environments</h1>
+    </header> 
+    <section> 
+    <img src="images/openapps.jpg" style="margin-right: 20px; float:right;" alt="iPhone showing which apps are running in the background"/>
+        <ul class="sevenless">
+          <li>Test on Phone: 
+          		<ul>
+                    <li>Simulator != Emulator</li>
+                    <li>Cap your memory</li>
+                </ul>
+                </li>
+          <li>Test with many apps open</li>
+          <li>Test on multiple devices</li>
+          <li>Test on mobile network</li>
+        </ul>
+      </section>
+</div>      
+    
+  
+<!-- Tools -->
+<div class="slide normal" style="background-image:url(images_old/activitymonitor.gif); background-position:5% 95%; background-size:550px;">
+    <header>
+    	<h1>Use Tools</h1>
+    </header> 
+    <section>
+    <img src="images/mobileperf.jpg" alt="iPhone with Mobile Performance" style="float: right; width: 280px"/> 
+        <ul>
+          <li><strong>WPO:</strong> <a href="http://www.blaze.io/mobile/">Blaze.io/mobile</a></li>
+          <li><strong>Remote Web Inspector:</strong> <a href="http://phonegap.github.com/weinre/">Weinre</a></li>
+          <li><strong>Firebug Lite:</strong> <a href="http://stevesouders.com/mobileperf/mobileperfbkm.php">stevesouders.com/mobileperf</a> bookmarklet</li>
+          <li><strong>Easy during dev:</strong> Desktop browser tools</li>
+        </ul>
+      </section>
+</div>  
+   
+<!-- Tricks -->
+<div class="slide normal" style="background-image:url(images_old/nerdGirl.jpg); background-position: 5% bottom;">
+<header>
+<h1>Tricks</h1>
+</header> 
+<section> 
+  <ul class="sevenless">
+    <li>Scale down (not up)</li>
+    <li>Use average size fonts</li>
+    <li>Take advantage of HTML5 &amp; native storage</li>
+    <li>Don't disable zoom (except for games)</li>
+  </ul>
+  
+  <footer>Credit: <a href="http://nerdquirks.tumblr.com/">NerdQuirks</a></footer>
+</section>
+</div>  
+    
+<!-- Take Aways -->
+<div class="slide normal" style="background-image:url(images_old/speed.jpg); background-size:cover;">
+     <header>
+      <h1>Conclusion</h1>
+     </header> 
+     <section> 
+       <ul class="sevenless whitened" style="margin-top: 20px">
+         <li>Follow performance recommendations</li>
+         <li>Minimize Latency</li>
+         <li>Manage memory</li>
+         <li>Use CSS Judiciously</li>
+         <li>Use JS Minimally (and NOT for animation)</li>
+        <li>Batch query and manipulations separately</li>
+        <li>Reuse the DOM</li>
+         <li>Keep Mobile in Mind</li>
+       </ul>
+       <footer>Photo Credit: <a href="http://www.nasa.gov/mission_pages/shuttle/shuttlemissions/sts125/multimedia/gallery/09-05-11-9.html">NASA.gov</a></footer>
+     </section>
+    </div>
+   
+   
+<!-- It's a phone -->
+<div class="slide normal">
+     <header>
+      <h1>Remember...</h1>
+     </header> 
+      
+       <section>
+          <h1 style="font-size: 60px; letter-spacing:0px">Your users may not be tethered</h1> 
+          <h1 class="notes" style="font-size: 60px; letter-spacing:0px">and their memory may be very limited.</h1>
+	   </section>
+    </div> 
+    
+      
+
+<!-- Thank you -->
+<div class="slide normal">
+     <header>
+      <h1>Thank you</h1>
+     </header> 
+      
+       <section>
+            <p style="float: right; margin-right: 20px;"><a href="http://www.sitepoint.com/books/htmlcss1/" style=" border:none"><img src="http://www.sitepointstatic.com/images/books/htmlcss1/3dcover-flat.png" alt="HTML5 &amp; CSS3 for the Real World" style="border:none; width: 180px;"></a>
+            <a href="http://shop.oreilly.com/product/0636920021711.do" style="clear:both; display:block; border:none"><img src="images/oreilly.gif" alt="Mobile HTML5: Using the Latest Today by Estelle Weyl and Maximiliano Firtman"></a></p>
+            <ul class="sevenless">
+              <li>Estelle Weyl</li>
+              <li><a href="http://standardista.com">standardista.com</a></li>
+              <li><a href="http://twitter.com/estellevw">@estellevw</a></li>
+            </ul>
+		  </section>
+    </div>
+      
+<!-- who to follow -->
+<div class="slide normal">
+     <header>
+      <h1>Who to follow</h1>
+     </header> 
+      
+     <section>
+     <ul class="sevenless">
+        <li><a href="http://www.twitter.com/estellevw">Estelle Weyl</a> - ME</li>
+        <li><a href="http://www.twitter.com/standardista">@standardista</a> - my WebDev tips</li>
+     	<li><a href="http://www.twitter.com/innerhtml">Matt Seely</a> - Netflix</li>
+     	<li><a href="http://twitter.com/souders">Steve Souders</a> - Google - Performance</li>
+     	<li><a href="http://twitter.com/slicknet">Nicholas Zakas</a> - JS &amp; Performance</li>
+     	<li><a href="http://twitter.com/stubbornella">Nicole Sullivan</a> - Stubbornella</li>
+        <li><a href="http://twitter.com/firt">Maximiliano Firtman</a> - Mobile</li>
+        <li><a href="http://twitter.com/anniesullie">Annie Sullivan</a> - Google</li>
+        <li><a href="http://twitter.com/ariyahidayat">Airya Hidyah</a> - Sencha</li>
+     </ul>       
+	 </section>
+    </div>
+
+
+  </div>
+  </div>
+  
+ <footer>
+<p style="float: left;">Press <span class="button">&rarr;</span> key to advance.</p> <p style="float:right"><a href="http://www.twitter.com/estellevw">@estellevw</a> &middot; <a href="http://www.standardista.com/mobile">Standardista.com/mobile</a></p>
+</footer>
+  <script src="velocity.js"></script>
+
+
+  </body> 
+
+</html>
+
