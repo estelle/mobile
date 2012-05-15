@@ -498,7 +498,19 @@ var slides = function() {
       }
 
     },
-
+	
+	addNotes: function(){
+		var ta = document.createElement('textarea');
+		var currentSlide = document.querySelector('.current section');
+		var key = 'speed' +  window.location.hash;
+		ta.value = window.localStorage.getItem(key) || '';
+		
+		ta.addEventListener('keyup', function(){
+			//console.log(key + ' ' + ta.value)
+		    window.localStorage.setItem(key,ta.value);
+		});
+		currentSlide.appendChild(ta);
+	},
     handleKeys: function(e) {    if (/^(input|textarea)$/i.test(e.target.nodeName)) return;
       
 
@@ -517,11 +529,14 @@ var slides = function() {
 		case 190: // 2
 		  console.log(e.keyCode);
           this.showNotes(); break;
+        case 52: // 4
+          this.addNotes(); break;
         case 51: // 3
 
           this.switch3D(); break;
 		case 116:
-		location.reload(true); break;
+		case 27:
+		location.reload(true); return false; break;
 
       }
 
