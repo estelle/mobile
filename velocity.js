@@ -500,10 +500,16 @@ var slides = function() {
     },
 	
 	addNotes: function(){
+		if(document.querySelector('.current textarea.mynotes')) {
+			var foo = document.querySelector('.current textarea.mynotes').classList;
+			foo.toggle('temphidden');
+			return;
+		}
 		var ta = document.createElement('textarea');
 		var currentSlide = document.querySelector('.current section');
 		var key = 'speed' +  window.location.hash;
 		ta.value = window.localStorage.getItem(key) || '';
+		ta.classList.add('mynotes');
 		
 		ta.addEventListener('keyup', function(){
 			//console.log(key + ' ' + ta.value)
