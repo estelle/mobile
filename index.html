@@ -6,6 +6,37 @@
     <style>
     iframe {display: none;}
     .current iframe {display: inherit;}
+	.code {
+   color: black;
+   font-size: 85%;
+   background-color: rgba(255,255,255,0.4);
+   -webkit-transition: all 2s ease-in 50ms;
+   -moz-transition: all 2s ease-in 50ms;
+   -ms-transition: all 2s ease-in 50ms;
+   -o-transition: all 2s ease-in 50ms;
+   transition: all 2s ease-in 50ms;
+}
+.code:hover {
+   color: red;
+   background-color: rgba(255,255,255,0.9);
+}
+.code:not(.code2):hover {
+   font-size: 120%;
+}
+.code2:hover {
+	-webkit-transform: scale(1.4);
+	-webkit-transform-origin: top left;
+	-moz-transform: scale(1.4);
+	-moz-transform-origin: top left;
+	-ms-transform: scale(1.4);
+	-ms-transform-origin: top left;
+	-o-transform: scale(1.4);
+	-o-transform-origin: top left;
+	transform: scale(1.4);
+	transform-origin: top left;
+	
+}
+.yes, .
 </style>
 <link href="velocity3.css" rel="stylesheet" media="projection, screen">
 
@@ -631,7 +662,7 @@ Images <big>1024px</big> or bigger are too <big>big</big> for memory</p>
         <li>Animations</li> 
         <li>&lsquo;Non-rendered&rsquo; content</li>
         <li>Recalculating / Repainting the UI</li>
-        </ul> <p style="font-weight:700; clear:both; ">Static images may render faster than CSS effects</p>
+        </ul> <p style="font-weight:700; clear:both; padding-top: 20px">Static images may render faster than CSS effects</p>
     
 <footer>Disney: "The Tortoise and The Hare"</footer>
      </section>
@@ -687,17 +718,7 @@ Images <big>1024px</big> or bigger are too <big>big</big> for memory</p>
      </section> 
     </div>     
           
-<!-- Gradients - light burst -->
-<div class="slide normal" style="padding:0; overflow:hidden" id="bursts">
-     <object data="bursts.html" style="height:100%; width:100%; border-radius: 18px">
-     <header>
-      <h1>Gradients</h1>
-     </header> 
-     <section>
-     <a href="bursts.html" target="_blank">See Redial Gradients in Action</a>
-     </section>
-     </object>
-    </div>    
+   
     
         
 <!-- Gradients -->
@@ -717,8 +738,135 @@ Images often faster than Gradients</li>
      
      </section>
     </div>
+ 
+<!-- font transition example -->
+<div class="slide"> 
+<header><h1>transitions</h1></header> 
+<section class="content"> 
+<pre contenteditable class="code">code {
+   color: black;
+   font-size: 85%;
+   background-color: rgba(255,255,255,0.9);
+   transition: all 2s ease-in 50ms;
+}
+code:hover {
+   color: red;
+   font-size: 120%;
+   background-color: rgba(255,255,255,0.8);
+}
+</pre>
+<pre contenteditable>code {
+   transition: 
+      color, font-size, background-color 2s ease-in 50ms;
+}</pre>
+<p>Requires reflow!</p>
+</section>
+</div>
+
+
+<!-- font transition example -->
+<div class="slide"> 
+<header><h1>transitions</h1></header> 
+<section class="content"> 
+<pre contenteditable class="code code2">code {
+   color: black;
+   font-size: 85%;
+   background-color: rgba(255,255,255,0.9);
+   transition: all 2s ease-in 50ms;
+}
+code:hover {
+   color: red;
+   transform: scale(1.4);
+   transform-origin: 0 0;
+   background-color: rgba(255,255,255,0.8);
+}
+</pre>
+<pre contenteditable>code {
+   transition: 
+      transform 2s ease-in 50ms;
+}</pre>
+<p>Only repaints</p>
+</section>
+</div> 
+  
+<!-- Repaint v. Reflow -->
+<div class="slide normal">
+    <header>
+    	<h1 style="visibility:hidden">Repaint v. Reflow</h1>
+    </header> 
+    <section> 
+        <p class="rate good"><span>✔</span> Repaint</p>
+        <p class="rate bad"><span>✘</span> Reflow</p>
+    </section>
+</div>
+  
+<!-- Repaint -->
+<div class="slide normal" style="background-image:url(images_old/paintbrush.jpg); background-size:cover;">
+     <header>
+      <h1 style="color:#fff">Repaint</h1>
+     </header> 
+     <section style="margin:120px 40px 0 30px;" class="whitened"> 
+     <p>When visual changes do NOT require recalculation of layout</p>
+     <ul class="sevenless">
+     	<li>Visibility</li>
+        <li>Colors</li>
+        <li>Transforms</li>
+        <li>Background images</li>
+        <li>Transparency</li>
+     </ul>
+     <footer>Photo: <a href="http://www.flickr.com/photos/chanbliss/3334163612/">Chanbliss</a></footer>
+     </section>
+    </div>
     
+        
+<!-- Reflorw -->
+<div class="slide normal" style="background-image:url(images_old/stream.jpg); background-size: cover;">
+    <header>
+        <h1 style="color:#fff">Reflow</h1>
+    </header> 
+    <section style="margin:0px 40px 0 30px;" class="whitened"> 
+        <p>When visual changes REQUIRE recalculation of layout</p>
+        <ul class="sevenless">
+        	<li>Page load, Layout &amp; orientation change</li>
+            <li>DOM Changes: Adding, removing, updating nodes</li>
+            <li>JS style information request</li>
+		   	<li>Changing value of display property</li>
+		   	<li>Changing to CSS property alters box model value</li>
+         	<li style="line-height:1">Resizing, zooming and scrolling (desktop), but not necessarily on mobile devices (viewport)</li>
+         	
+        </ul>
+        <ul class="notes">
+        <li>The larger a DOM tree, the more expensive a reflow is</li>
+        <li>Opera lists repaint and reflow as one of the 3 main contributors to sluggishness</li>
+        <li>Reflow of an element causes the subsequent reflow of all child and ancestor elements as well as any elements following it in the DOM.</li></ul>
+        <footer>Photo: <a href="http://www.alaskaadventures.com">Alaska Adventures</a></footer>
+    </section>
+</div>
+
+<!-- Reflow video --> 
+<div class="slide normal">
+    <header>
+        <h1>Reflow</h1>
+    </header> 
+    <section>        
+<iframe width="560" height="420" src="http://www.youtube.com/embed/dndeRnzkJDU" frameborder="0" style="display: block; margin:60px auto" allowfullscreen></iframe>
+</section>
+</div>
+
+  
+<!-- Gradients - light burst -->
+<div class="slide normal" style="padding:0; overflow:hidden" id="bursts">
+     <object data="bursts.html" style="height:100%; width:100%; border-radius: 18px">
+     <header>
+      <h1>Animations (and Gradients)</h1>
+     </header> 
+     <section>
+     <a href="bursts.html" target="_blank">See Redial Gradients in Action</a>
+     </section>
+     </object>
+    </div> 
     
+        
 <!-- 3D Transforms -->
 <div class="slide normal" style="background-image:url(images_old/panacea.png); background-position: 50% 65%;">
      <header>
@@ -850,70 +998,6 @@ but animation has to wait.</p>
 </section>
 </div>
     
-<!-- Repaint v. Reflow -->
-<div class="slide normal">
-    <header>
-    	<h1 style="visibility:hidden">Repaint v. Reflow</h1>
-    </header> 
-    <section> 
-        <p class="rate good"><span>✔</span> Repaint</p>
-        <p class="rate bad"><span>✘</span> Reflow</p>
-    </section>
-</div>
-  
-<!-- Repaint -->
-<div class="slide normal" style="background-image:url(images_old/paintbrush.jpg); background-size:cover;">
-     <header>
-      <h1 style="color:#fff">Repaint</h1>
-     </header> 
-     <section style="margin:120px 40px 0 30px;" class="whitened"> 
-     <p>When visual changes do NOT require recalculation of layout</p>
-     <ul class="sevenless">
-     	<li>Visibility</li>
-        <li>Colors</li>
-        <li>Transforms</li>
-        <li>Background images</li>
-        <li>Transparency</li>
-     </ul>
-     <footer>Photo: <a href="http://www.flickr.com/photos/chanbliss/3334163612/">Chanbliss</a></footer>
-     </section>
-    </div>
-    
-        
-<!-- Reflorw -->
-<div class="slide normal" style="background-image:url(images_old/stream.jpg); background-size: cover;">
-    <header>
-        <h1 style="color:#fff">Reflow</h1>
-    </header> 
-    <section style="margin:0px 40px 0 30px;" class="whitened"> 
-        <p>When visual changes REQUIRE recalculation of layout</p>
-        <ul class="sevenless">
-        	<li>Page load, Layout &amp; orientation change</li>
-            <li>DOM Changes: Adding, removing, updating nodes</li>
-            <li>JS style information request</li>
-		   	<li>Changing value of display property</li>
-		   	<li>Changing to CSS property alters box model value</li>
-         	<li style="line-height:1">Resizing, zooming and scrolling (desktop), but not necessarily on mobile devices (viewport)</li>
-         	
-        </ul>
-        <ul class="notes">
-        <li>The larger a DOM tree, the more expensive a reflow is</li>
-        <li>Opera lists repaint and reflow as one of the 3 main contributors to sluggishness</li>
-        <li>Reflow of an element causes the subsequent reflow of all child and ancestor elements as well as any elements following it in the DOM.</li></ul>
-        <footer>Photo: <a href="http://www.alaskaadventures.com">Alaska Adventures</a></footer>
-    </section>
-</div>
-
-<!-- Reflow video --> 
-<div class="slide normal">
-    <header>
-        <h1>Reflow</h1>
-    </header> 
-    <section>        
-<iframe width="560" height="420" src="http://www.youtube.com/embed/dndeRnzkJDU" frameborder="0" style="display: block; margin:60px auto" allowfullscreen></iframe>
-</section>
-</div>
-
 
 
 
