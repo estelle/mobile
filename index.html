@@ -853,6 +853,58 @@ code:hover {
 </section>
 </div>
 
+
+<!-- minimize DOM -->
+<div class="slide normal">
+    <header>
+    	<h1>Minimize the DOM</h1>
+    </header> 
+    <section> 
+        <ul class="sevenless">
+            <li>Minimize number of nodes
+            	<ul class="notes">
+                	<li>Uses up memory</li>
+                    <li>Measures each node for each repaint</li>
+                </ul></li>
+            <li>Cache DOM lookups
+            <ul class="notes">
+                	<li>Store them!</li>
+                </ul>
+            </li> 
+            <li>Minimize DOM manipulations
+            	<ul class="notes">
+                	<li>Batch DOM queries &amp; DOM manipulations separately </li>
+                </ul>
+            </li>
+        </ul>
+         <p class="notes" style="margin-top:50px">More nodes = more expensive! </p>
+        
+    </section>
+</div>
+      
+      
+<!-- reuse DOM -->
+<div class="slide normal" style="background-image:url(images_old/trashcan.jpg); background-position: 5% 95%;">
+    <header>
+    	<h1>Reuse the DOM</h1>
+    </header> 
+    <section> 
+        <p style="font-size: 40px; margin:20px"><strong>Pool</strong> Elements and Objects</p>
+        <p style="font-size: 40px; margin:20px"><strong>Reuse</strong> instead of Allocate and Destroy</p>
+        <img src="images/tetris.gif" alt="tetris" style="float:right;"/>
+        <ol class="">
+        	<li style="line-height:1.3">Create a pool of DOM elements (more than you need)</li>
+            <li>Use the nodes you created</li>
+            <li>Release back into pool</li>
+            <li>Go to step 2</li>
+        </ol>
+    </section>
+</div>
+   
+
+   
+
+ 
   
 <!-- Gradients - light burst -->
 <div class="slide normal" style="padding:0; overflow:hidden" id="bursts">
@@ -999,57 +1051,6 @@ but animation has to wait.</p>
 </div>
     
 
-
-
-<!-- minimize DOM -->
-<div class="slide normal">
-    <header>
-    	<h1>Minimize the DOM</h1>
-    </header> 
-    <section> 
-        <ul class="sevenless">
-            <li>Minimize number of nodes
-            	<ul class="notes">
-                	<li>Uses up memory</li>
-                    <li>Measures each node for each repaint</li>
-                </ul></li>
-            <li>Cache DOM lookups
-            <ul class="notes">
-                	<li>Store them!</li>
-                </ul>
-            </li> 
-            <li>Minimize DOM manipulations
-            	<ul class="notes">
-                	<li>Batch DOM queries &amp; DOM manipulations separately </li>
-                </ul>
-            </li>
-        </ul>
-         <p class="notes" style="margin-top:50px">More nodes = more expensive! </p>
-        
-    </section>
-</div>
-      
-      
-<!-- reuse DOM -->
-<div class="slide normal" style="background-image:url(images_old/trashcan.jpg); background-position: 5% 95%;">
-    <header>
-    	<h1>Reuse the DOM</h1>
-    </header> 
-    <section> 
-        <p style="font-size: 40px; margin:20px"><strong>Pool</strong> Elements and Objects</p>
-        <p style="font-size: 40px; margin:20px"><strong>Reuse</strong> instead of Allocate and Destroy</p>
-        <img src="images/tetris.gif" alt="tetris" style="float:right;"/>
-        <ol class="">
-        	<li style="line-height:1.3">Create a pool of DOM elements (more than you need)</li>
-            <li>Use the nodes you created</li>
-            <li>Release back into pool</li>
-            <li>Go to step 2</li>
-        </ol>
-    </section>
-</div>
-   
-
-   
 
 
 
